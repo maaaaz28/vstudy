@@ -10,7 +10,6 @@
 *.mpeg
 
 # Ignore picture files
-*.png
 *.jpg
 *.jpeg
 *.gif
@@ -18,7 +17,6 @@
 *.tiff
 *.tif
 *.ico
-*.svg
 *.webp
 
 # Ignore virtual environment directories
