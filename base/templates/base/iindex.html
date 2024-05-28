@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .main{
+            /* background-color: rgb(112, 94, 94); */
+            width: 100%;
+            height: 100vh;
+            background-color: #2d2d39;
+        }
+
+        /* Navbar styles */
+        .nav1 {
+            border: 2px solid black;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            height: 12vh;
+            background-color:#3f4156;
+            position: relative; /* Set position to relative */
+        }
+
+        .nav1 ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Login and Sign Up button styles */
+        .login-btn,
+        .signup-btn{
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #333;
+            cursor: pointer;
+            margin-right: 10px; /* Add margin between buttons */
+        }
+
+        /* Positioning the buttons */
+        .login-btn {
+            position: absolute;
+            top: 50%; /* Adjust as needed */
+            transform: translateY(-50%);
+            right: 10px; /* Adjust distance from right edge */
+        }
+
+        .signup-btn {
+            position: absolute;
+            top: 50%; /* Adjust as needed */
+            transform: translateY(-50%);
+            right: 85px; /* Adjust distance from right edge */
+        }
+        .vr{
+            position: absolute;
+            top:-14%;
+            transform: translateY(50%);
+            left: 90px;
+            text-decoration: none;
+            color: white;
+            width: 14vw;
+            height: 7vh;
+            background-color: #333;
+            padding: 9px;            
+
+        }
+        .message{
+            text-align: center;
+            padding-top: 164px;
+            color: white;
+        }
+        .message h1{
+            background-color:#333;
+            width: 55vw;
+            height: 10vh;
+            margin-left: 320px;
+            padding-top: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <nav class="nav1">
+            <ul>
+                <!-- Empty list items to create space -->
+                <li></li>
+                <li><a href="" class="vr"><strong>VirtualStudyRooms</strong></a>
+                </li>
+                <!-- Buttons -->
+                <li><a href="{% url 'login' %}" class="login-btn">Login</a></li>
+                <li><a href="{% url 'register' %}" class="signup-btn">Sign Up</a></li>
+            </ul>
+        </nav>
+        <div class="message">
+            <h1> Wellcome to the VirtualStudyEnvironment </h1>
+        </div>
+    </div>
+</body>
+</html>
