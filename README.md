@@ -10,25 +10,19 @@ git clone https://github.com/divanov11/StudyBud.git
 
 ```
 
---> Move into the directory where we have the project files : 
-```bash
-cd StudyBud
-
-```
-
 --> Create a virtual environment :
 ```bash
-# Let's install virtualenv first
-pip install virtualenv
+# Let's install venv first
+pip install venv
 
 # Then we create our virtual environment
-virtualenv envname
+venv venv_name
 
 ```
 
 --> Activate the virtual environment :
 ```bash
-envname\scripts\activate
+venv_name\scripts\activate
 
 ```
 
