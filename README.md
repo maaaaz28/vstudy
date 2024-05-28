@@ -13,10 +13,10 @@ git clone https://github.com/divanov11/StudyBud.git
 --> Create a virtual environment :
 ```bash
 # Let's install venv first
-pip install venv
+pip install virtualenv
 
 # Then we create our virtual environment
-venv venv_name
+python -m venv venv_name
 
 ```
 
