@@ -8,6 +8,10 @@
         <div class="room__topLeft">
           <a href="{% url 'home' %}">
             <!-- SVG for back arrow -->
+              <!-- SVG for back arrow -->
+              <svg class="back-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
           </a>
           <h3>{{ room.name }}</h3>
         </div>
@@ -17,13 +21,16 @@
             <!-- SVG for edit -->
           </a>
           <a href="{% url 'delete-room' room.id %}">
+            <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
             <!-- SVG for delete -->
           </a>
         </div>
         {% endif %}
       </div>
-      <div class="room__box scroll">
-        <div class="room__header scroll">
+      <div class="room__box scroll" id="box_scroll">
+        <div class="room__header scroll" id="header_scroll">
           <div class="room__info">
             <h3>{{ room.name }}</h3>
             <span>{{ room.created|timesince }} ago</span>
@@ -31,7 +38,7 @@
           <div class="room__hosted">
             <p>Hosted By</p>
             <a href="{% url 'user-profile' room.host.id %}" class="room__author">
-              <div class="avatar avatar--small">
+              <div class="avatar avatar--small" id="avatar_small">
                 <img src="{{ room.host.avatar.url }}" />
               </div>
               <span>@{{ room.host.username }}</span>
@@ -39,11 +46,11 @@
           </div>
           <span class="room__topics">{{ room.topic }}</span>
         </div>
-        <div class="room__conversation">
-          <div class="threads scroll">
+        <div class="room__conversation" id="convo">
+          <div class="threads scroll" id="th_scroll">
             {% for message in room_messages %}
-            <div class="thread">
-              <div class="thread__top">
+            <div class="thread" id="thr">
+              <div class="thread__top" id="thrd_top">
                 <div class="thread__author">
                   <a href="{% url 'user-profile' message.user.id %}" class="thread__authorInfo">
                     <div class="avatar avatar--small">
@@ -91,8 +98,8 @@
             Upload
           </label>
           <input id="fileInput" type="file" name="file" style="display: none;" />
-          <input name="body" placeholder="Write your message here..." style="width: 496px; padding: 19px; margin-bottom: 18px; margin-left: 0.1px;" />
-          <button type="submit" style="display: none;">Send</button>
+          <input name="body" placeholder="Write your message here..." style="width: 557px; padding: 19px; margin-bottom: 18px; margin-left: 0.1px;" />
+          <input type="submit" value=">>" style="padding: 10px 22px; background-color: #696d97; color: white; border: none; border-radius: -24px; cursor: pointer; width: 6px;">
         </form>
         <div id="preview"></div>
       </div>
@@ -121,6 +128,7 @@
 
 {% block extraJs %}
 <script>
+  
   // Function to handle file input change event
   function handleFileInputChange(event) {
     const file = event.target.files[0];
@@ -161,5 +169,6 @@
   // Add event listener to file input
   const fileInput = document.getElementById('fileInput');
   fileInput.addEventListener('change', handleFileInputChange);
+  
 </script>
 {% endblock %}
