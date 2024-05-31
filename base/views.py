@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from .models import Room, Topic, Message, User
 from .forms import MessageForm, RoomForm, UserForm, MyUserCreationForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -65,7 +66,7 @@ def registerPage(request):
 
 
 def home(request):
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    q = request.GET.get('q', '')
 
     rooms = Room.objects.filter(
         Q(topic__name__icontains=q) |
@@ -75,13 +76,23 @@ def home(request):
 
     topics = Topic.objects.all()[0:5]
     room_count = rooms.count()
-    room_messages = Message.objects.filter(
-        Q(room__topic__name__icontains=q))[0:3]
 
-    context = {'rooms': rooms, 'topics': topics,
-               'room_count': room_count, 'room_messages': room_messages}
+    # Fetch all recent messages related to the search query and paginate them
+    room_messages_list = Message.objects.filter(
+        Q(room__topic__name__icontains=q)
+    ).order_by('-created')
+
+    paginator = Paginator(room_messages_list, 10)  # Show 10 messages per page
+    page_number = request.GET.get('page')
+    room_messages = paginator.get_page(page_number)
+
+    context = {
+        'rooms': rooms,
+        'topics': topics,
+        'room_count': room_count,
+        'room_messages': room_messages
+    }
     return render(request, 'base/home.html', context)
-
 
 def room(request, pk):
     room = get_object_or_404(Room, id=pk)

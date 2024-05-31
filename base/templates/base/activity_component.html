@@ -7,11 +7,11 @@
         <div class="activities__boxHeader roomListRoom__header">
             <a href="{% url 'user-profile' message.user.id %}" class="roomListRoom__author">
                 <div class="avatar avatar--small">
-                    <img src="{{message.user.avatar.url}}" />
+                    <img src="{{ message.user.avatar.url }}" alt="{{ message.user.username }}">
                 </div>
                 <p>
-                    @{{message.user.username}}
-                    <span>{{message.created|timesince}} ago</span>
+                    @{{ message.user.username }}
+                    <span>{{ message.created|timesince }} ago</span>
                 </p>
             </a>
 
@@ -20,9 +20,7 @@
                 <a href="{% url 'delete-message' message.id %}">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                         <title>remove</title>
-                        <path
-                            d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z">
-                        </path>
+                        <path d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"></path>
                     </svg>
                 </a>
             </div>
@@ -30,10 +28,27 @@
 
         </div>
         <div class="activities__boxContent">
-            <p>replied to post “<a href="{% url 'room' message.room.id %}">{{message.room}}</a>”</p>
-            <div class="activities__boxRoomContent">{{message.body}}</div>
+            <p>replied to post “<a href="{% url 'room' message.room.id %}">{{ message.room }}</a>”</p>
+            <div class="activities__boxRoomContent">{{ message.body }}</div>
         </div>
     </div>
     {% endfor %}
 
+    <div class="pagination">
+        <span class="step-links">
+            {% if room_messages.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ room_messages.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ room_messages.number }} of {{ room_messages.paginator.num_pages }}.
+            </span>
+
+            {% if room_messages.has_next %}
+                <a href="?page={{ room_messages.next_page_number }}">next</a>
+                <a href="?page={{ room_messages.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
