@@ -1165,15 +1165,17 @@ a {
 }
 .upload-icon {
   display: inline-block;
-  padding: 10px 20px;
-  border: 1px solid #696d97; /* Border for better visibility */
-  border-radius: 35px;
+  padding: 11px 20px;
+  background-color: #696d97;
+  border-radius: 8px;
   cursor: pointer;
   width: 128px;
 }
 
 .upload-icon:hover {
-  background-color: #696d97;
+  border: 1px solid #696d97; 
+  border-radius: 8px;
+  cursor: pointer;  
   color: #fff;
 }
 
